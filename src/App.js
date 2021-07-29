@@ -43,9 +43,6 @@ function App(props) {
     <Route path="/props">
       <Prop name="nikhil" age="25" />
     </Route>
-    <Route path="*">
-      404 Page
-    </Route>
     </Switch>
     </BrowserRouter>
     
