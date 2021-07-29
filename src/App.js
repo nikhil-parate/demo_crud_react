@@ -1,24 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import Form from './form';
+import React  from 'react';
+import {BrowserRouter, Route, Switch, Link} from 'react-router-dom';
+import About  from './About';
+import Home from './Home';
+import Post from './posts';
+import History from './history';
+import {ContextStr} from './context';
+import Prop from './Counter';
 
-function App() {
+function App(props) {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <> 
+    <ContextStr.Consumer>
+    {
+      (context)=> {
+        return(
+          <>
+          <p>{context.str}</p>
+          </>
+        )
+      }
+    }
+    </ContextStr.Consumer>
+    <BrowserRouter>
+    {/* <a href="/">Home</a>
+    <a href="/about">About</a> */}
+      <History /> <br />
+     <Link to="/">Home</Link>
+     <Link to="/about">About</Link>
+     <Link to="/posts">Posts</Link>
+     <Link to="/props">Prop</Link>
+    <Switch>
+    <Route  path="/about" >
+    <About /> 
+    </Route>
+    <Route exact path="/" render={()=><Home />}/>
+    <Route path="/posts">
+      <Post />
+      <Form />
+    </Route>
+    <Route path="/props">
+      <Prop name="nikhil" age="25" />
+    </Route>
+    <Route path="*">
+      404 Page
+    </Route>
+    </Switch>
+    </BrowserRouter>
+    
+    </>
   );
 }
 
