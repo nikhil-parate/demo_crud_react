@@ -7,6 +7,7 @@ class count extends React.Component{
     render() {
         return(
             <>
+              <h3>{this.props.description}</h3>
               <p>name: {this.props.name}</p>
               <p>age: {this.props.age}</p>
             </>

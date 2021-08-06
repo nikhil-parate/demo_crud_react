@@ -1,10 +1,7 @@
 import React, {
     Component
 } from 'react';
-import {
-    Button,
-    Table
-} from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
 import axios from 'axios';
 
 const API_URL = 'https://jsonplaceholder.typicode.com/posts';
@@ -19,7 +16,18 @@ class demo extends Component {
             userId: "",
             title: "",
             body: "",
+            errors: {
+                userId: "",
+                title: "",
+                body: ""
+              },
+            touched: {
+                userId: false,
+                title : false,
+                body: false
+              },
         }
+        
     }
     componentDidMount = () => this.getPost();
     getPost = async () => {
@@ -35,13 +43,45 @@ class demo extends Component {
             console.log(err);
         }
     }
-    handle = async (event) => {
-        this.setState({
-            [event.target.name]: event.target.value
-        })
+    handle = async ({ target: { name, value } }) => {
+        const errors = this.state.errors;
+        switch (name) {
+            case "userId": {
+              if (!value) {
+                errors[name] = "userId is empty";
+              } else if(isNaN(name)){
+                errors[name] = "userId must be Number";
+              } else {
+                errors[name] = "";  
+              }
+              break;
+            }
+            case "title": {
+              if (!value) {
+                errors[name] = "title is empty";
+              } else {
+                errors[name] = "";
+              }
+              break;
+            }
+            case "body": {
+                if (!value) {
+                  errors[name] = "body is empty";
+                } else {
+                  errors[name] = "";
+                }
+                break;
+              }
+          }
+          this.setState({ [name]: value, errors });
         //console.log(this.state)
 
     }
+    handleBlur = ({ target: { name } }) => {
+        const touched = { ...this.state.touched };
+        touched[name] = true;
+        this.setState({ touched });
+      };
     submit = async (event) => {
         console.log(event.target);
         event.preventDefault();
@@ -151,7 +191,7 @@ class demo extends Component {
             input ref = {
                 this.myRef1
             }
-            type = "number"
+            type = "number" required
             value = {
                 this.state.userId.value
             }
@@ -159,13 +199,14 @@ class demo extends Component {
             onChange = {
                 this.handle
             }
+            onBlur={this.handleBlur}
             /> < /
             label > <
             label > Title <
             input ref = {
                 this.myRef2
             }
-            type = "text"
+            type = "text" required
             value = {
                 this.state.title.value
             }
@@ -173,13 +214,14 @@ class demo extends Component {
             onChange = {
                 this.handle
             }
+            onBlur={this.handleBlur}
             /> < /
             label > <
             label > Body <
             input ref = {
                 this.myRef3
             }
-            type = "text"
+            type = "text" required
             value = {
                 this.state.body.value
             }
@@ -187,6 +229,7 @@ class demo extends Component {
             onChange = {
                 this.handle
             }
+            onBlur={this.handleBlur}
             /> < /
             label > <
             input type = "submit"
@@ -203,7 +246,7 @@ class demo extends Component {
             th > Body < /th> <
             th > Action < /th> < /
             thead > <
-            tbody > {
+            tbody> {
                 this.state.posts.map(({
                     userId,
                     id,
@@ -213,33 +256,33 @@ class demo extends Component {
                     return ( <
                         tr key = {
                             id
-                        } >
+                        } style={{background:"#EFC9AF"}}>
                         <
-                        td > {
+                        td style={{fontWeight:"bold", color:"#104c91"}}> {
                             userId
                         } < /td> <
-                        td > {
+                        td style={{fontWeight:"bold", color:"#104c91"}}> {
                             id
                         } < /td> <
-                        td > {
+                        td style={{fontWeight:"bold", color:"#104c91"}}> {
                             title
                         } < /td> <
-                        td > {
+                        td style={{fontWeight:"bold", color:"#104c91"}}> {
                             body
                         } < /td> <
-                        td > < Button onClick = {
+                        td > < Button style={{background:"#ff6347"}} onClick = {
                             () => this.delete(id)
                         } > Delete < /Button></td >
                         <
-                        td > < Button onClick = {
+                        td > < Button style={{background:"#7fffd4"}} onClick = {
                             () => this.view(id)
                         } > View User < /Button></td >
                         <
-                        td > < Button onClick = {
+                        td > < Button style={{background:"#7fffd4"}} onClick = {
                             () => this.comments(id)
                         } > View Comments < /Button></td >
                         <
-                        td > < Button onClick = {
+                        td > < Button style={{background:"#77dd77"}} onClick = {
                             () => this.update(id, title, body)
                         } > Update < /Button></td >
                         <
@@ -247,9 +290,9 @@ class demo extends Component {
                     );
                 })
             } <
-            /tbody> < /
-            Table > <
-            />
+            /tbody> 
+            </ Table > 
+            </>
         )
     }
 }

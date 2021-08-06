@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/demo_crud_react/static/js/main.9c98c210.chunk.js",
-    "main.js.map": "/demo_crud_react/static/js/main.9c98c210.chunk.js.map",
+    "main.js": "/demo_crud_react/static/js/main.30a42952.chunk.js",
+    "main.js.map": "/demo_crud_react/static/js/main.30a42952.chunk.js.map",
     "runtime-main.js": "/demo_crud_react/static/js/runtime-main.b75f624a.js",
     "runtime-main.js.map": "/demo_crud_react/static/js/runtime-main.b75f624a.js.map",
     "static/js/2.4e9e62e5.chunk.js": "/demo_crud_react/static/js/2.4e9e62e5.chunk.js",
@@ -12,6 +12,6 @@
   "entrypoints": [
     "static/js/runtime-main.b75f624a.js",
     "static/js/2.4e9e62e5.chunk.js",
-    "static/js/main.9c98c210.chunk.js"
+    "static/js/main.30a42952.chunk.js"
   ]
 }

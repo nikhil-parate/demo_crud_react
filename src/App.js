@@ -17,20 +17,20 @@ function App(props) {
       (context)=> {
         return(
           <>
-          <p>{context.str}</p>
+          <p style={{color:"white", textAlign:"center", background:"#40404F", fontSize: "50px"}}>{context.str}</p>
           </>
         )
       }
     }
     </ContextStr.Consumer>
-    <BrowserRouter>
+    <BrowserRouter >
     {/* <a href="/">Home</a>
     <a href="/about">About</a> */}
       <History /> <br />
-     <Link to="/">Home</Link>
-     <Link to="/about">About</Link>
-     <Link to="/posts">Posts</Link>
-     <Link to="/props">Prop</Link>
+     <Link style={{fontSize:"20px", paddingRight:"2px"}} to="/">Home</Link>
+     <Link style={{fontSize:"20px", paddingRight:"2px"}} to="/about">About</Link>
+     <Link style={{fontSize:"20px", paddingRight:"2px"}} to="/posts">Posts</Link>
+     <Link  style={{fontSize:"20px", paddingRight:"2px"}}to="/props">Props</Link>
     <Switch>
     <Route  path="/about" >
     <About /> 
@@ -41,7 +41,7 @@ function App(props) {
       <Form />
     </Route>
     <Route path="/props">
-      <Prop name="nikhil" age="25" />
+      <Prop name="nikhil" age="25" description="This is an example to present props working"/>
     </Route>
     </Switch>
     </BrowserRouter>
